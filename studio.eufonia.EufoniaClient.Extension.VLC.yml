@@ -12,6 +12,7 @@ build-options:
   prepend-pkg-config-path: /app/extensions/VLC/lib/pkgconfig
   prepend-ld-library-path: /app/extensions/VLC/lib
   env:
+    BUILDCC: gcc
     VLC_PLUGIN_PATH: /app/extensions/VLC/lib/vlc/plugins
 
 cleanup:
@@ -22,6 +23,8 @@ cleanup:
   - /share/man
   - '*.a'
   - '*.la'
+cleanup-commands:
+  - /app/extensions/VLC/lib/vlc/vlc-cache-gen /app/extensions/VLC/lib/vlc/plugins
 
 modules:
   - name: vlc
