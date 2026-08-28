@@ -1,0 +1,87 @@
+id: studio.eufonia.EufoniaClient.Extension.VLC
+branch: '50'
+runtime: studio.eufonia.EufoniaClient
+runtime-version: stable
+sdk: org.gnome.Sdk//50
+build-extension: true
+separate-locales: false
+
+build-options:
+  prefix: /app/extensions/VLC
+  prepend-path: /app/extensions/VLC/bin
+  prepend-pkg-config-path: /app/extensions/VLC/lib/pkgconfig
+  prepend-ld-library-path: /app/extensions/VLC/lib
+  env:
+    VLC_PLUGIN_PATH: /app/extensions/VLC/lib/vlc/plugins
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
+  - '*.a'
+  - '*.la'
+
+modules:
+  - name: vlc
+    buildsystem: autotools
+    config-opts:
+      - --disable-a52
+      - --disable-aom
+      - --disable-chromaprint
+      - --disable-dca
+      - --disable-dvbpsi
+      - --disable-dvdnav
+      - --disable-dvdread
+      - --disable-faad
+      - --disable-fluidsynth
+      - --disable-goom
+      - --disable-jack
+      - --disable-kate
+      - --disable-libass
+      - --disable-libmpeg2
+      - --disable-lirc
+      - --disable-live555
+      - --disable-lua
+      - --disable-mad
+      - --disable-matroska
+      - --disable-mpc
+      - --disable-ncurses
+      - --disable-projectm
+      - --disable-qt
+      - --disable-samplerate
+      - --disable-schroedinger
+      - --disable-sdl-image
+      - --disable-shout
+      - --disable-skins2
+      - --disable-soxr
+      - --disable-speex
+      - --disable-srt
+      - --disable-taglib
+      - --disable-twolame
+      - --disable-upnp
+      - --disable-vdpau
+      - --disable-vnc
+      - --disable-x264
+      - --disable-x265
+      - --disable-zvbi
+      - --enable-avcodec
+      - --enable-avformat
+      - --enable-merge-ffmpeg
+      - --enable-pulse
+      - --enable-run-as-root
+      - --enable-swscale
+    post-install:
+      - install -Dm644 studio.eufonia.EufoniaClient.Extension.VLC.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+    sources:
+      - type: archive
+        url: https://download.videolan.org/pub/videolan/vlc/3.0.23/vlc-3.0.23.tar.xz
+        sha256: e891cae6aa3ccda69bf94173d5105cbc55c7a7d9b1d21b9b21666e69eff3e7e0
+        x-checker-data:
+          type: anitya
+          project-id: 6505
+          stable-only: true
+          url-template: https://download.videolan.org/pub/videolan/vlc/$version/vlc-$version.tar.xz
+      - type: file
+        path: studio.eufonia.EufoniaClient.Extension.VLC.metainfo.xml
