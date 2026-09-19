@@ -27,6 +27,26 @@ cleanup-commands:
   - /app/extensions/VLC/lib/vlc/vlc-cache-gen /app/extensions/VLC/lib/vlc/plugins
 
 modules:
+  - name: ffmpeg
+    config-opts:
+      - --enable-pic
+      - --enable-shared
+      - --disable-static
+      - --disable-doc
+      - --disable-programs
+      - --enable-gpl
+    sources:
+      - type: archive
+        url: https://ffmpeg.org/releases/ffmpeg-4.4.8.tar.xz
+        sha256: c73848c4ae283d9eaee7be3b276affbc3543380483555500d0dd2c9b7e1c39c3
+        x-checker-data:
+          type: anitya
+          project-id: 5405
+          versions:
+            ">=": "4"
+            "<": "5"
+          url-template: https://ffmpeg.org/releases/ffmpeg-$version.tar.xz
+
   - name: vlc
     buildsystem: autotools
     config-opts:
@@ -40,6 +60,7 @@ modules:
       - --disable-faad
       - --disable-fluidsynth
       - --disable-goom
+      - --disable-gst-decode
       - --disable-jack
       - --disable-kate
       - --disable-libass
