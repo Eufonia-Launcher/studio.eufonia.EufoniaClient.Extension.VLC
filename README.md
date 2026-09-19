@@ -19,5 +19,5 @@ flatpak-builder --user --force-clean --disable-rofiles-fuse \
 flatpak remote-add --user --if-not-exists --no-gpg-verify \
   eufonia-vlc-local "$PWD/repo"
 flatpak install --user --reinstall eufonia-vlc-local \
-  runtime/studio.eufonia.EufoniaClient.Extension.VLC/x86_64/50
+  runtime/studio.eufonia.EufoniaClient.Extension.VLC/x86_64/51
 ```
